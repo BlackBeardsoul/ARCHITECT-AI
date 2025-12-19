@@ -1,10 +1,10 @@
 import streamlit as st
 from openai import OpenAI
 
-# Custom CSS for full chat-backsplash background + dark overlay + red theme
+# CSS for full backsplash background + dark overlay + red theme
 st.markdown("""
 <style>
-    /* Full page background from assets */
+    /* Full page background */
     .stApp {
         background-image: url("assets/chat-backsplash.jpg");
         background-size: cover;
@@ -59,7 +59,7 @@ st.markdown("""
         font-size: 70px;
         text-align: center;
         letter-spacing: 12px;
-        margin: 20px 0;
+        margin: 30px 0;
     }
     .subtitle {
         color: #ff6666;
@@ -70,7 +70,7 @@ st.markdown("""
     }
     .logo {
         display: block;
-        margin: 0 auto 30px auto;
+        margin: 30px auto;
         max-width: 500px;
         filter: drop-shadow(0 0 40px #ff0000);
     }
@@ -79,7 +79,7 @@ st.markdown("""
 
 st.set_page_config(page_title="Architect AI", page_icon="💀", layout="wide")
 
-# Logo centered at top
+# Logo top center
 st.image("assets/logo.jpg", use_container_width=True)
 
 # Title & subtitle
