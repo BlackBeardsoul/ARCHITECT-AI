@@ -18,93 +18,56 @@ st.set_page_config(
     initial_sidebar_state="collapsed"
 )
 
-# Custom red/black cyberpunk CSS
-st.markdown("""
-<style>
-    .stApp {
-        background: #000000;
-    }
-    .main {
-        background: rgba(10, 0, 0, 0.95);
-        border: 3px solid #ff0000;
-        border-radius: 20px;
-        padding: 2rem;
-        box-shadow: 0 0 50px #ff0000;
-        max-width: 1000px;
-        margin: 0 auto;
-    }
-    h1 {
-        color: #ff0000;
-        text-shadow: 0 0 30px #ff0000;
-        font-size: 70px;
-        text-align: center;
-        letter-spacing: 12px;
-        margin: 40px 0;
-    }
-    .subtitle {
-        color: #ff3333;
-        text-align: center;
-        font-size: 26px;
-        margin-bottom: 50px;
-        text-shadow: 0 0 10px #ff0000;
-    }
-    .stTextInput > div > div > input {
-        background-color: #111111;
-        color: #ff0000;
-        border: 2px solid #ff0000;
-        border-radius: 10px;
-        box-shadow: 0 0 20px #ff0000;
-    }
-    .stButton > button {
-        background-color: #ff0000;
-        color: #000000;
-        border: none;
-        font-weight: bold;
-        font-size: 18px;
-        padding: 15px 40px;
-        border-radius: 10px;
-        box-shadow: 0 0 30px #ff0000;
-    }
-    .stButton > button:hover {
-        background-color: #cc0000;
-        box-shadow: 0 0 50px #ff0000;
-    }
-    .chat-message {
-        background-color: #111111;
-        border: 2px solid #ff0000;
-        border-radius: 12px;
-        padding: 20px;
-        margin: 20px 0;
-        box-shadow: 0 0 20px rgba(255, 0, 0, 0.5);
-    }
-    .user-message {
-        background-color: #ff0000;
-        color: #000000;
-    }
-    .assistant-message {
-        background-color: #220000;
-        color: #ff0000;
-        border: 2px solid #ff0000;
-    }
-    .logo {
-        display: block;
-        margin: 40px auto;
-        max-width: 400px;
-        filter: drop-shadow(0 0 40px #ff0000);
-    }
-</style>
-""", unsafe_allow_html=True)
+# Custom CSS — red/black cyberpunk, dark overlay, centered content
+st.markdown(
+    """
+    <style>
+        .main {
+            background: rgba(5,5,5,0.93);
+            border: 3px solid #ff0066;
+            border-radius: 20px;
+            padding: 2rem;
+            box-shadow: 0 0 40px #ff0066;
+        }
+        h1, h2 {
+            color: #ff0066;
+            text-shadow: 0 0 20px #ff0066;
+            text-align: center;
+        }
+        .stTextInput > div > div > input {
+            background:#111;
+            color:#fff;
+            border:2px solid #ff0066;
+        }
+        .stButton > button {
+            background:#ff0066;
+            color:#000;
+            font-weight:bold;
+            height:3em;
+        }
+        .stButton > button:hover {
+            background:#ff3388;
+        }
+        .logo {
+            display: block;
+            margin: 30px auto 20px auto;
+            max-width: 300px;
+            filter: drop-shadow(0 0 30px #ff0066);
+        }
+    </style>
+    """,
+    unsafe_allow_html=True,
+)
 
-# Logo top center
-st.image("assets/logo.jpg", use_container_width=False, width=400)
+# Logo centered at top — smaller size
+st.image("assets/logo.jpg", use_container_width=False, width=300)
 
-# Title & subtitle
+# Title and subtitle
 st.markdown("<h1>ARCHITECT AI</h1>", unsafe_allow_html=True)
-st.markdown("<p class='subtitle'>Personal Hustler Assistant — Niches | Research | Money Exploitation</p>", unsafe_allow_html=True)
-
+st.markdown("<h3 style='text-align:center;color:#888;'>Verified Results Only • Monero Only • Escrow Required</h3>", unsafe_allow_html=True)
 st.divider()
 
-# Chatbot class (persistent memory + unrestricted prompt)
+# Chatbot class (your exact one with persistent memory)
 class Chatbot:
     def __init__(self):
         self.history_file = "chat_history.json"
@@ -179,29 +142,26 @@ class Chatbot:
 chatbot = Chatbot()
 
 # Display chat history
-for message in st.session_state.messages:
-    if message["role"] == "user":
-        with st.chat_message("user"):
-            st.markdown(f'<div class="chat-message user-message">{message["content"]}</div>', unsafe_allow_html=True)
+for msg in st.session_state.messages:
+    if msg["role"] == "user":
+        st.markdown(f"**You:** {msg['content']}", unsafe_allow_html=True)
     else:
-        with st.chat_message("assistant"):
-            st.markdown(f'<div class="chat-message assistant-message">{message["content"]}</div>', unsafe_allow_html=True)
+        st.markdown(f"**ARCHITECT AI:** {msg['content']}", unsafe_allow_html=True)
+    st.markdown("---")
 
-# Chat input
-if prompt := st.chat_input("Command the Architect..."):
+# Input
+if prompt := st.chat_input("Message ARCHITECT AI..."):
     st.session_state.messages.append({"role": "user", "content": prompt})
-    with st.chat_message("user"):
-        st.markdown(f'<div class="chat-message user-message">{prompt}</div>', unsafe_allow_html=True)
-
-    with st.chat_message("assistant"):
-        with st.spinner("Executing..."):
-            reply = chatbot.get_response(prompt)
-        st.markdown(f'<div class="chat-message assistant-message">{reply}</div>', unsafe_allow_html=True)
+    
+    with st.spinner("ARCHITECT is responding..."):
+        reply = chatbot.get_response(prompt)
+    st.session_state.messages.append({"role": "assistant", "content": reply})
+    st.rerun()
 
 # Footer
 st.markdown("""
-<div style='text-align:center; color:#ff3333; margin-top:60px; font-size:20px;'>
+<div style='text-align:center; color:#555; margin-top:60px;'>
     Monero Only • Escrow First • No Mercy
-    <br>© 2025 ARCHITECT AI — Forged in the Dark
+    <br>© 2025 ARCHITECT AI — All Rights Reserved
 </div>
 """, unsafe_allow_html=True)
