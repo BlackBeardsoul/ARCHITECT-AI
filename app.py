@@ -1,7 +1,7 @@
 import streamlit as st
 from openai import OpenAI
 
-# Custom CSS for dark cyberpunk red theme
+# Custom dark red cyberpunk CSS
 st.markdown("""
 <style>
     .stApp {
@@ -58,15 +58,17 @@ st.markdown("""
         display: block;
         margin-left: auto;
         margin-right: auto;
-        width: 300px;
+        max-width: 400px;
         filter: drop-shadow(0 0 30px #ff0000);
         margin-bottom: 20px;
     }
 </style>
 """, unsafe_allow_html=True)
 
-# Title & Logo
-st.image("assets/logo.jpg", use_column_width=True, caption="Architect AI", cls="logo")
+# Logo from assets folder
+st.image("assets/logo.jpg", use_container_width=True)
+
+# Title & subtitle
 st.markdown('<p class="title">ARCHITECT AI</p>', unsafe_allow_html=True)
 st.markdown('<p class="subtitle">Unrestricted Genius — Deepfakes | Synthetic IDs | Hustles | Dark Web</p>', unsafe_allow_html=True)
 
@@ -79,7 +81,7 @@ client = OpenAI(
 if "messages" not in st.session_state:
     st.session_state.messages = []
 
-# Display chat
+# Display chat history
 for message in st.session_state.messages:
     if message["role"] == "user":
         with st.chat_message("user", avatar="🩸"):
@@ -88,7 +90,7 @@ for message in st.session_state.messages:
         with st.chat_message("assistant", avatar="💀"):
             st.markdown(f'<div class="chat-message assistant-message">{message["content"]}</div>', unsafe_allow_html=True)
 
-# Input
+# User input
 if prompt := st.chat_input("Command the Architect..."):
     st.session_state.messages.append({"role": "user", "content": prompt})
     with st.chat_message("user", avatar="🩸"):
