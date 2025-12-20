@@ -65,34 +65,12 @@ st.markdown(
         margin-top: -10px;
     }
 
-    /* INPUT BOX */
-    .stTextInput > div > div > input {
-        background: rgba(10,10,10,0.95);
-        color: #fff;
-        border: 2px solid #ff0066;
-        border-radius: 10px;
-        padding: 14px;
-        box-shadow: inset 0 0 15px rgba(255,0,102,0.4);
-    }
+   
 
-    /* BUTTON */
-    .stButton > button {
-        background: linear-gradient(135deg, #ff0066, #00ffcc);
-        color: #000;
-        font-weight: 900;
-        letter-spacing: 1px;
-        border-radius: 12px;
-        height: 3.2em;
-        box-shadow: 0 0 20px rgba(0,255,204,0.6);
-        border: none;
-    }
-
-    .stButton > button:hover {
-        background: linear-gradient(135deg, #ff3388, #33ffee);
-        box-shadow: 0 0 35px rgba(255,0,102,0.9);
-        transform: scale(1.03);
-    }
-
+    </style>
+    """,
+    unsafe_allow_html=True,
+)
     /* LOGO */
     .logo {
         display: block;
@@ -233,4 +211,5 @@ st.markdown("""
     <br>© 2025 ARCHITECT AI — All Rights Reserved
 </div>
 """, unsafe_allow_html=True)
+
 
