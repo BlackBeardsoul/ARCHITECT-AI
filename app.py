@@ -24,6 +24,13 @@ client = OpenAI(
 st.markdown(
     """
     <style>
+    /* FORCE APP TO ALWAYS FILL VIEWPORT HEIGHT */
+.stApp {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
     /* FULL PAGE BACKGROUND */
     .stApp {
         background:
@@ -232,6 +239,7 @@ st.markdown(
     """,
     unsafe_allow_html=True,
 )
+
 
 
 
