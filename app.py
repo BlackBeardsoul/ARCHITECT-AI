@@ -113,6 +113,27 @@ st.markdown(
         box-shadow: 0 0 35px rgba(255,0,102,0.9);
         transform: scale(1.05);
     }
+    /* === NUCLEAR: KILL ANY WHITE BACKGROUND LAYERS === */
+html, body, #root, #app, .stApp,
+[data-testid="stAppViewContainer"],
+[data-testid="stMain"],
+[data-testid="stMainBlockContainer"],
+[data-testid="stVerticalBlock"],
+[data-testid="stSidebar"],
+[data-testid="stToolbar"],
+[data-testid="stHeader"],
+[data-testid="stStatusWidget"],
+[data-testid="stBottomBlockContainer"] {
+    background: #050505 !important;
+    background-color: #050505 !important;
+}
+
+/* Some builds use a plain <main> wrapper */
+main, main > div {
+    background: #050505 !important;
+    background-color: #050505 !important;
+}
+
     </style>
     """,
     unsafe_allow_html=True,
@@ -207,4 +228,5 @@ st.markdown(
     """,
     unsafe_allow_html=True,
 )
+
 
