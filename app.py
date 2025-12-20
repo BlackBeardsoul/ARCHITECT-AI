@@ -3,50 +3,27 @@ from openai import OpenAI
 import os
 import json
 
-# --- PAGE CONFIG ---
+# ---------------- PAGE CONFIG ----------------
 st.set_page_config(
     page_title="Architect AI",
     page_icon="assets/icon.jpg",
     layout="centered",
 )
 
-# --- SESSION STATE INIT ---
+# ---------------- SESSION STATE ----------------
 if "messages" not in st.session_state:
     st.session_state.messages = []
 
-# --- GROQ CLIENT ---
+# ---------------- GROQ CLIENT ----------------
 client = OpenAI(
     api_key=st.secrets["GROQ_API_KEY"],
     base_url="https://api.groq.com/openai/v1",
 )
 
-# --- CUSTOM CSS ---
+# ---------------- CSS ----------------
 st.markdown(
     """
     <style>
-    /* FORCE APP TO FILL VIEWPORT HEIGHT */
-    .stApp {
-        min-height: 100vh;
-        display: flex;
-        flex-direction: column;
-    }
-
-    /* MAIN CONTENT FLEX AREA */
-    .app-content {
-        flex: 1;
-        display: flex;
-        flex-direction: column;
-        justify-content: flex-start;
-    }
-
-    /* REMOVE DEFAULT WHITE PAGE */
-    html, body {
-        background: #050505 !important;
-        margin: 0;
-        padding: 0;
-        overflow-x: hidden;
-    }
-
     /* FULL PAGE BACKGROUND */
     .stApp {
         background:
@@ -56,6 +33,13 @@ st.markdown(
         background-position: center;
         background-attachment: fixed;
         font-family: 'Trebuchet MS', 'Arial Black', sans-serif;
+    }
+
+    html, body {
+        background: #050505 !important;
+        margin: 0;
+        padding: 0;
+        overflow-x: hidden;
     }
 
     /* MAIN CONTAINER */
@@ -97,7 +81,7 @@ st.markdown(
         margin-bottom: 10px;
     }
 
-    /* CHAT INPUT FOOTER */
+    /* CHAT INPUT */
     section[data-testid="stChatInput"] {
         background: rgba(8,8,8,0.95) !important;
         border-top: 2px solid #00ffcc;
@@ -134,15 +118,15 @@ st.markdown(
     unsafe_allow_html=True,
 )
 
-# --- BEGIN FLEX CONTENT ---
-st.markdown("<div class='app-content'>", unsafe_allow_html=True)
+# ---------------- HELPER: FILL VERTICAL SPACE ----------------
+def fill_vertical_space():
+    st.markdown("<div style='height:40vh'></div>", unsafe_allow_html=True)
 
-# --- CENTERED LOGO ---
+# ---------------- HEADER ----------------
 c1, c2, c3 = st.columns([1, 2, 1])
 with c2:
     st.image("assets/logo.jpg", width=280)
 
-# --- TITLES ---
 st.markdown("<h1>ARCHITECT AI</h1>", unsafe_allow_html=True)
 st.markdown(
     "<h3>Local AI Chat • Fast Responses • Clean Output</h3>",
@@ -151,23 +135,18 @@ st.markdown(
 
 st.divider()
 
-# --- CHATBOT ---
+# ---------------- CHATBOT ----------------
 class Chatbot:
     def __init__(self, history_file="chat_history.json"):
         self.history_file = history_file
         self.messages = self._load_history()
-        self.system_prompt = (
-            "You are Architect AI, a helpful assistant. "
-            "Provide clear, accurate, and safe responses."
-        )
+        self.system_prompt = "You are a helpful AI assistant."
 
     def _load_history(self):
         if os.path.exists(self.history_file):
             try:
                 with open(self.history_file, "r", encoding="utf-8") as f:
-                    data = json.load(f)
-                if isinstance(data, list):
-                    return data
+                    return json.load(f)
             except Exception:
                 pass
         return []
@@ -198,19 +177,20 @@ class Chatbot:
 
 chatbot = Chatbot()
 
-# Sync saved history to UI once
+# Sync saved history into UI once
 if not st.session_state.messages and chatbot.messages:
     st.session_state.messages = chatbot.messages.copy()
 
-# --- DISPLAY CHAT ---
+# ---------------- DISPLAY CHAT ----------------
 for msg in st.session_state.messages:
     with st.chat_message(msg["role"]):
         st.markdown(msg["content"])
 
-# --- END FLEX CONTENT ---
-st.markdown("</div>", unsafe_allow_html=True)
+# 🔑 THIS IS THE FIX — FORCE PAGE HEIGHT WHEN EMPTY
+if len(st.session_state.messages) == 0:
+    fill_vertical_space()
 
-# --- INPUT ---
+# ---------------- INPUT ----------------
 if prompt := st.chat_input("Message ARCHITECT AI..."):
     st.session_state.messages.append({"role": "user", "content": prompt})
     with st.spinner("Responding..."):
@@ -218,7 +198,7 @@ if prompt := st.chat_input("Message ARCHITECT AI..."):
     st.session_state.messages.append({"role": "assistant", "content": reply})
     st.rerun()
 
-# --- FOOTER ---
+# ---------------- FOOTER ----------------
 st.markdown(
     """
     <div style='text-align:center; color:#555; margin-top:20px;'>
