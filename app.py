@@ -115,6 +115,28 @@ st.markdown(
         padding: 12px;
         margin-bottom: 10px;
     }
+    /* === ABSOLUTE FINAL WHITE STRIP FIX === */
+
+/* Streamlit main app root */
+[data-testid="stAppViewContainer"] {
+    background: transparent !important;
+}
+
+/* Streamlit page content wrapper */
+[data-testid="stVerticalBlock"] {
+    background: transparent !important;
+}
+
+/* Kill any remaining default background */
+main {
+    background: transparent !important;
+}
+
+/* Ensure nothing below the app shows white */
+html, body {
+    background: #050505 !important;
+}
+
     </style>
     """,
     unsafe_allow_html=True,
@@ -212,4 +234,5 @@ st.markdown(
     """,
     unsafe_allow_html=True,
 )
+
 
