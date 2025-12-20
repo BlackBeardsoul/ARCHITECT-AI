@@ -113,6 +113,10 @@ st.markdown(
         box-shadow: 0 0 35px rgba(255,0,102,0.9);
         transform: scale(1.05);
     }
+   
+    body { overscroll-behavior: none; }
+html { background: #050505 !important; }
+
     /* === NUCLEAR: KILL ANY WHITE BACKGROUND LAYERS === */
 html, body, #root, #app, .stApp,
 [data-testid="stAppViewContainer"],
@@ -228,5 +232,6 @@ st.markdown(
     """,
     unsafe_allow_html=True,
 )
+
 
 
