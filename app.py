@@ -18,54 +18,125 @@ st.set_page_config(
     initial_sidebar_state="collapsed"
 )
 
-# Custom CSS — red/black cyberpunk, dark overlay, centered content
+import streamlit as st
+
+# --- PAGE CONFIG ---
+st.set_page_config(
+    page_title="Architect AI",
+    page_icon="assets/icon.jpg",
+    layout="centered",
+)
+
+# --- CUSTOM CSS ---
 st.markdown(
     """
     <style>
-        .main {
-            background: rgba(5,5,5,0.93);
-            border: 3px solid #ff0066;
-            border-radius: 20px;
-            padding: 2rem;
-            box-shadow: 0 0 40px #ff0066;
-        }
-        h1, h2 {
-            color: #ff0066;
-            text-shadow: 0 0 20px #ff0066;
-            text-align: center;
-        }
-        .stTextInput > div > div > input {
-            background:#111;
-            color:#fff;
-            border:2px solid #ff0066;
-        }
-        .stButton > button {
-            background:#ff0066;
-            color:#000;
-            font-weight:bold;
-            height:3em;
-        }
-        .stButton > button:hover {
-            background:#ff3388;
-        }
-        .logo {
-            display: block;
-            margin: 30px auto 20px auto;
-            max-width: 300px;
-            filter: drop-shadow(0 0 30px #ff0066);
-        }
+
+    /* FULL PAGE BACKGROUND */
+    .stApp {
+        background: 
+            linear-gradient(rgba(5,5,5,0.85), rgba(5,5,5,0.92)),
+            url("assets/backsplash.jpg");
+        background-size: cover;
+        background-position: center;
+        background-attachment: fixed;
+        font-family: 'Trebuchet MS', 'Arial Black', sans-serif;
+    }
+
+    /* MAIN CHAT CONTAINER */
+    .block-container {
+        background: rgba(8,8,8,0.85);
+        border: 2px solid #00ffcc;
+        border-radius: 18px;
+        padding: 2.5rem;
+        box-shadow: 
+            0 0 35px rgba(0,255,204,0.35),
+            inset 0 0 40px rgba(255,0,102,0.15);
+        backdrop-filter: blur(6px);
+    }
+
+    /* TITLES */
+    h1 {
+        color: #00ffcc;
+        text-align: center;
+        letter-spacing: 4px;
+        text-shadow: 
+            0 0 10px #00ffcc,
+            0 0 25px #ff0066;
+        font-weight: 900;
+    }
+
+    h3 {
+        text-align: center;
+        color: #bbb;
+        letter-spacing: 1px;
+        margin-top: -10px;
+    }
+
+    /* INPUT BOX */
+    .stTextInput > div > div > input {
+        background: rgba(10,10,10,0.95);
+        color: #fff;
+        border: 2px solid #ff0066;
+        border-radius: 10px;
+        padding: 14px;
+        box-shadow: inset 0 0 15px rgba(255,0,102,0.4);
+    }
+
+    /* BUTTON */
+    .stButton > button {
+        background: linear-gradient(135deg, #ff0066, #00ffcc);
+        color: #000;
+        font-weight: 900;
+        letter-spacing: 1px;
+        border-radius: 12px;
+        height: 3.2em;
+        box-shadow: 0 0 20px rgba(0,255,204,0.6);
+        border: none;
+    }
+
+    .stButton > button:hover {
+        background: linear-gradient(135deg, #ff3388, #33ffee);
+        box-shadow: 0 0 35px rgba(255,0,102,0.9);
+        transform: scale(1.03);
+    }
+
+    /* LOGO */
+    .logo {
+        display: block;
+        margin: 10px auto 25px auto;
+        max-width: 280px;
+        filter: 
+            drop-shadow(0 0 20px #00ffcc)
+            drop-shadow(0 0 40px #ff0066);
+    }
+
+    /* CHAT MESSAGES */
+    .stChatMessage {
+        background: rgba(12,12,12,0.8);
+        border-left: 4px solid #00ffcc;
+        border-radius: 10px;
+        padding: 12px;
+        margin-bottom: 10px;
+    }
+
     </style>
     """,
     unsafe_allow_html=True,
 )
 
-# Logo centered at top — smaller size
-st.image("assets/logo.jpg", use_container_width=False, width=300)
+# --- LOGO ---
+st.image("assets/logo.jpg", use_container_width=False, width=280)
 
-# Title and subtitle
+# --- TITLES ---
 st.markdown("<h1>ARCHITECT AI</h1>", unsafe_allow_html=True)
-st.markdown("<h3 style='text-align:center;color:#888;'>Verified Results Only • Monero Only • Escrow Required</h3>", unsafe_allow_html=True)
+st.markdown(
+    "<h3>Underground Intelligence • No Noise • Precision Output</h3>",
+    unsafe_allow_html=True
+)
+
 st.divider()
+
 
 # Chatbot class (your exact one with persistent memory)
 class Chatbot:
@@ -165,3 +236,4 @@ st.markdown("""
     <br>© 2025 ARCHITECT AI — All Rights Reserved
 </div>
 """, unsafe_allow_html=True)
+
