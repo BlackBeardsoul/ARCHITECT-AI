@@ -1,5 +1,7 @@
 import streamlit as st
 from openai import OpenAI
+import os
+
 
 st.set_page_config(page_title="Architect AI", page_icon="💀", layout="centered")
 
@@ -285,6 +287,7 @@ st.markdown(
     """,
     unsafe_allow_html=True,
 )
+
 
 
 
