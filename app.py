@@ -71,15 +71,7 @@ st.markdown(
     """,
     unsafe_allow_html=True,
 )
-    /* LOGO */
-    .logo {
-        display: block;
-        margin: 10px auto 25px auto;
-        max-width: 280px;
-        filter: 
-            drop-shadow(0 0 20px #00ffcc)
-            drop-shadow(0 0 40px #ff0066);
-    }
+   
 
     /* CHAT MESSAGES */
     .stChatMessage {
@@ -211,5 +203,6 @@ st.markdown("""
     <br>© 2025 ARCHITECT AI — All Rights Reserved
 </div>
 """, unsafe_allow_html=True)
+
 
 
