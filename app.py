@@ -161,7 +161,7 @@ with c2:
 
 st.markdown("<h1>ARCHITECT AI</h1>", unsafe_allow_html=True)
 st.markdown(
-    "<h3>Local AI Chat • Fast Responses • Clean Output</h3>",
+    "<h3>Local AI ASSISTANT</h3>",
     unsafe_allow_html=True,
 )
 
@@ -239,6 +239,7 @@ st.markdown(
     """,
     unsafe_allow_html=True,
 )
+
 
 
 
