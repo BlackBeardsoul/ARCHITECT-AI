@@ -17,7 +17,7 @@ st.set_page_config(
     layout="centered",
 )
 
-# ✅ FIX: SESSION STATE INIT (THIS IS WHAT STOPS THE ERROR)
+# ✅ FIX: SESSION STATE INIT
 if "messages" not in st.session_state:
     st.session_state.messages = []
 
@@ -36,7 +36,8 @@ st.markdown(
         background-attachment: fixed;
         font-family: 'Trebuchet MS', 'Arial Black', sans-serif;
     }
-   /* MAIN CHAT CONTAINER */
+
+    /* MAIN CHAT CONTAINER */
     .block-container {
         background: rgba(8,8,8,0.85);
         border: 2px solid #00ffcc;
@@ -47,7 +48,8 @@ st.markdown(
             inset 0 0 40px rgba(255,0,102,0.15);
         backdrop-filter: blur(6px);
     }
-   /* TITLES */
+
+    /* TITLES */
     h1 {
         color: #00ffcc;
         text-align: center;
@@ -64,14 +66,6 @@ st.markdown(
         letter-spacing: 1px;
         margin-top: -10px;
     }
-
-   
-
-    </style>
-    """,
-    unsafe_allow_html=True,
-)
-   
 
     /* CHAT MESSAGES */
     .stChatMessage {
@@ -203,6 +197,7 @@ st.markdown("""
     <br>© 2025 ARCHITECT AI — All Rights Reserved
 </div>
 """, unsafe_allow_html=True)
+
 
 
 
