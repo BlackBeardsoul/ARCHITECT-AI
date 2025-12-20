@@ -17,7 +17,7 @@ st.set_page_config(
     layout="centered",
 )
 
-# ✅ FIX: SESSION STATE INIT
+# ✅ SESSION STATE INIT (FIXES ERROR)
 if "messages" not in st.session_state:
     st.session_state.messages = []
 
@@ -25,6 +25,21 @@ if "messages" not in st.session_state:
 st.markdown(
     """
     <style>
+
+    /* FORCE FULL DARK BACKGROUND – REMOVES WHITE BOTTOM */
+    html, body, [data-testid="stAppViewContainer"], .stApp {
+        background-color: transparent !important;
+    }
+
+    body {
+        margin: 0;
+        padding: 0;
+        overflow-x: hidden;
+    }
+
+    footer, footer * {
+        background: rgba(8,8,8,0.95) !important;
+    }
 
     /* FULL PAGE BACKGROUND */
     .stApp {
@@ -67,6 +82,39 @@ st.markdown(
         margin-top: -10px;
     }
 
+    /* CHAT INPUT FOOTER */
+    section[data-testid="stChatInput"] {
+        background: rgba(8,8,8,0.95) !important;
+        border-top: 2px solid #00ffcc;
+        box-shadow:
+            0 -12px 30px rgba(0,255,204,0.25),
+            inset 0 0 25px rgba(255,0,102,0.15);
+    }
+
+    section[data-testid="stChatInput"] textarea {
+        background: rgba(10,10,10,0.95) !important;
+        color: #fff !important;
+        border: 2px solid #ff0066 !important;
+        border-radius: 12px;
+        padding: 14px;
+        box-shadow: inset 0 0 15px rgba(255,0,102,0.4);
+    }
+
+    section[data-testid="stChatInput"] button {
+        background: linear-gradient(135deg, #ff0066, #00ffcc) !important;
+        color: #000 !important;
+        font-weight: 900;
+        border-radius: 10px;
+        box-shadow: 0 0 20px rgba(0,255,204,0.6);
+        border: none;
+    }
+
+    section[data-testid="stChatInput"] button:hover {
+        background: linear-gradient(135deg, #ff3388, #33ffee) !important;
+        box-shadow: 0 0 35px rgba(255,0,102,0.9);
+        transform: scale(1.05);
+    }
+
     /* CHAT MESSAGES */
     .stChatMessage {
         background: rgba(12,12,12,0.8);
@@ -75,111 +123,16 @@ st.markdown(
         padding: 12px;
         margin-bottom: 10px;
     }
-/* CHAT INPUT CONTAINER (BOTTOM BAR) */
-.stChatInput {
-    background: rgba(8,8,8,0.92) !important;
-    border-top: 2px solid #00ffcc;
-    box-shadow:
-        0 -10px 30px rgba(0,255,204,0.25),
-        inset 0 0 20px rgba(255,0,102,0.15);
-    padding: 1rem;
-}
 
-/* TEXTAREA INPUT */
-.stChatInput textarea {
-    background: rgba(10,10,10,0.95) !important;
-    color: #ffffff !important;
-    border: 2px solid #ff0066 !important;
-    border-radius: 12px;
-    padding: 14px;
-    box-shadow: inset 0 0 15px rgba(255,0,102,0.4);
-    font-size: 1rem;
-}
-
-/* PLACEHOLDER TEXT */
-.stChatInput textarea::placeholder {
-    color: #888;
-}
-
-/* SEND BUTTON */
-.stChatInput button {
-    background: linear-gradient(135deg, #ff0066, #00ffcc) !important;
-    color: #000 !important;
-    font-weight: 900;
-    border-radius: 10px;
-    box-shadow: 0 0 20px rgba(0,255,204,0.6);
-    border: none;
-}
-
-/* SEND BUTTON HOVER */
-.stChatInput button:hover {
-    background: linear-gradient(135deg, #ff3388, #33ffee) !important;
-    box-shadow: 0 0 35px rgba(255,0,102,0.9);
-    transform: scale(1.05);
-}
-/* === FORCE DARK BACKGROUND FOR CHAT INPUT FOOTER === */
-
-/* Outer footer wrapper */
-section[data-testid="stChatInput"] {
-    background: rgba(8,8,8,0.95) !important;
-    border-top: 2px solid #00ffcc;
-    box-shadow:
-        0 -12px 30px rgba(0,255,204,0.25),
-        inset 0 0 25px rgba(255,0,102,0.15);
-}
-
-/* Inner container */
-section[data-testid="stChatInput"] > div {
-    background: transparent !important;
-}
-
-/* Textarea */
-section[data-testid="stChatInput"] textarea {
-    background: rgba(10,10,10,0.95) !important;
-    color: #ffffff !important;
-    border: 2px solid #ff0066 !important;
-    border-radius: 12px;
-    padding: 14px;
-    box-shadow: inset 0 0 15px rgba(255,0,102,0.4);
-    font-size: 1rem;
-}
-
-/* Placeholder */
-section[data-testid="stChatInput"] textarea::placeholder {
-    color: #888;
-}
-
-/* Send button */
-section[data-testid="stChatInput"] button {
-    background: linear-gradient(135deg, #ff0066, #00ffcc) !important;
-    color: #000 !important;
-    font-weight: 900;
-    border-radius: 10px;
-    box-shadow: 0 0 20px rgba(0,255,204,0.6);
-    border: none;
-}
-
-/* Hover */
-section[data-testid="stChatInput"] button:hover {
-    background: linear-gradient(135deg, #ff3388, #33ffee) !important;
-    box-shadow: 0 0 35px rgba(255,0,102,0.9);
-    transform: scale(1.05);
-}
-
-/* REMOVE DEFAULT STREAMLIT WHITE FOOTER GAP */
-footer {
-    background: transparent !important;
-}
-
-
-  
     </style>
     """,
     unsafe_allow_html=True,
 )
 
-# --- LOGO ---
-st.image("assets/logo.jpg", use_container_width=False, width=280)
+# --- CENTERED LOGO (STREAMLIT-NATIVE) ---
+col1, col2, col3 = st.columns([1, 2, 1])
+with col2:
+    st.image("assets/logo.jpg", width=280)
 
 # --- TITLES ---
 st.markdown("<h1>ARCHITECT AI</h1>", unsafe_allow_html=True)
@@ -189,6 +142,64 @@ st.markdown(
 )
 
 st.divider()
+
+# --- CHATBOT CLASS ---
+class Chatbot:
+    def __init__(self):
+        self.history_file = "chat_history.json"
+        if os.path.exists(self.history_file):
+            with open(self.history_file, 'r', encoding='utf-8') as f:
+                self.messages = json.load(f)
+        else:
+            self.messages = []
+
+        self.system_prompt = "You are Architect AI..."
+
+    def add_message(self, role, content):
+        self.messages.append({"role": role, "content": content})
+        self.save_history()
+
+    def get_response(self, user_message):
+        self.add_message("user", user_message)
+        response = client.chat.completions.create(
+            model="llama-3.3-70b-versatile",
+            messages=[{"role": "system", "content": self.system_prompt}] + self.messages,
+            max_tokens=3000,
+            temperature=0.7
+        )
+        reply = response.choices[0].message.content.strip()
+        self.add_message("assistant", reply)
+        return reply
+
+    def save_history(self):
+        with open(self.history_file, 'w', encoding='utf-8') as f:
+            json.dump(self.messages, f, indent=2, ensure_ascii=False)
+
+chatbot = Chatbot()
+
+# --- DISPLAY CHAT ---
+for msg in st.session_state.messages:
+    with st.chat_message(msg["role"]):
+        st.markdown(msg["content"])
+
+# --- INPUT ---
+if prompt := st.chat_input("Message ARCHITECT AI..."):
+    st.session_state.messages.append({"role": "user", "content": prompt})
+
+    with st.spinner("ARCHITECT is responding..."):
+        reply = chatbot.get_response(prompt)
+
+    st.session_state.messages.append({"role": "assistant", "content": reply})
+    st.rerun()
+
+# --- FOOTER ---
+st.markdown("""
+<div style='text-align:center; color:#555; margin-top:60px;'>
+    Monero Only • Escrow First • No Mercy
+    <br>© 2025 ARCHITECT AI — All Rights Reserved
+</div>
+""", unsafe_allow_html=True)
+
 
 # Chatbot class (your exact one with persistent memory)
 class Chatbot:
@@ -230,10 +241,6 @@ class Chatbot:
             "• Point two\n\n"
             "1. Step one\n"
             "2. Step two\n\n"
-            "```language\n"
-            "code here\n"
-            "```\n\n"
-            "> Note\n\n"
             "Begin with ### Reasoning"
         )
 
@@ -294,6 +301,7 @@ st.markdown("""
     <br>© 2025 ARCHITECT AI — All Rights Reserved
 </div>
 """, unsafe_allow_html=True)
+
 
 
 
