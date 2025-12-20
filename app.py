@@ -115,7 +115,7 @@ st.markdown(
         padding: 12px;
         margin-bottom: 10px;
     }
-    /* === ABSOLUTE FINAL WHITE STRIP FIX === */
+   /* === ABSOLUTE FINAL WHITE STRIP FIX === */
 
 /* Streamlit main app root */
 [data-testid="stAppViewContainer"] {
@@ -137,7 +137,7 @@ html, body {
     background: #050505 !important;
 }
 
-    </style>
+ </style>
     """,
     unsafe_allow_html=True,
 )
@@ -234,5 +234,6 @@ st.markdown(
     """,
     unsafe_allow_html=True,
 )
+
 
 
