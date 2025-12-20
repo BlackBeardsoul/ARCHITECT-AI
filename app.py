@@ -75,7 +75,50 @@ st.markdown(
         padding: 12px;
         margin-bottom: 10px;
     }
+/* CHAT INPUT CONTAINER (BOTTOM BAR) */
+.stChatInput {
+    background: rgba(8,8,8,0.92) !important;
+    border-top: 2px solid #00ffcc;
+    box-shadow:
+        0 -10px 30px rgba(0,255,204,0.25),
+        inset 0 0 20px rgba(255,0,102,0.15);
+    padding: 1rem;
+}
 
+/* TEXTAREA INPUT */
+.stChatInput textarea {
+    background: rgba(10,10,10,0.95) !important;
+    color: #ffffff !important;
+    border: 2px solid #ff0066 !important;
+    border-radius: 12px;
+    padding: 14px;
+    box-shadow: inset 0 0 15px rgba(255,0,102,0.4);
+    font-size: 1rem;
+}
+
+/* PLACEHOLDER TEXT */
+.stChatInput textarea::placeholder {
+    color: #888;
+}
+
+/* SEND BUTTON */
+.stChatInput button {
+    background: linear-gradient(135deg, #ff0066, #00ffcc) !important;
+    color: #000 !important;
+    font-weight: 900;
+    border-radius: 10px;
+    box-shadow: 0 0 20px rgba(0,255,204,0.6);
+    border: none;
+}
+
+/* SEND BUTTON HOVER */
+.stChatInput button:hover {
+    background: linear-gradient(135deg, #ff3388, #33ffee) !important;
+    box-shadow: 0 0 35px rgba(255,0,102,0.9);
+    transform: scale(1.05);
+}
+
+  
     </style>
     """,
     unsafe_allow_html=True,
@@ -197,6 +240,7 @@ st.markdown("""
     <br>© 2025 ARCHITECT AI — All Rights Reserved
 </div>
 """, unsafe_allow_html=True)
+
 
 
 
