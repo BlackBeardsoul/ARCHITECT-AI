@@ -10,14 +10,6 @@ client = OpenAI(
     base_url="https://api.groq.com/openai/v1"
 )
 
-# Page config
-st.set_page_config(
-    page_title="ARCHITECT AI",
-    page_icon="💀",
-    layout="centered",
-    initial_sidebar_state="collapsed"
-)
-
 import streamlit as st
 
 # --- PAGE CONFIG ---
@@ -32,27 +24,39 @@ st.markdown(
     """
     <style>
 
-    /* FULL PAGE BACKGROUND */
+    /* FULL BACKSPLASH BACKGROUND */
     .stApp {
-        background: 
-            linear-gradient(rgba(5,5,5,0.85), rgba(5,5,5,0.92)),
-            url("assets/backsplash.jpg");
+        background: url("assets/backsplash.jpg") no-repeat center center fixed;
         background-size: cover;
-        background-position: center;
-        background-attachment: fixed;
         font-family: 'Trebuchet MS', 'Arial Black', sans-serif;
     }
 
-    /* MAIN CHAT CONTAINER */
+    /* FLOATING MAIN CONTAINER */
     .block-container {
-        background: rgba(8,8,8,0.85);
+        background: rgba(5,5,5,0.82);
         border: 2px solid #00ffcc;
-        border-radius: 18px;
-        padding: 2.5rem;
-        box-shadow: 
-            0 0 35px rgba(0,255,204,0.35),
-            inset 0 0 40px rgba(255,0,102,0.15);
+        border-radius: 20px;
+        padding: 3rem;
+        margin-top: 2rem;
+        box-shadow:
+            0 0 35px rgba(0,255,204,0.45),
+            inset 0 0 25px rgba(255,0,102,0.25);
         backdrop-filter: blur(6px);
+    }
+
+    /* CENTERED LOGO */
+    .logo-center {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin: 20px 0 30px 0;
+    }
+
+    .logo-center img {
+        max-width: 300px;
+        filter:
+            drop-shadow(0 0 25px #00ffcc)
+            drop-shadow(0 0 45px #ff0066);
     }
 
     /* TITLES */
@@ -60,7 +64,7 @@ st.markdown(
         color: #00ffcc;
         text-align: center;
         letter-spacing: 4px;
-        text-shadow: 
+        text-shadow:
             0 0 10px #00ffcc,
             0 0 25px #ff0066;
         font-weight: 900;
@@ -68,12 +72,12 @@ st.markdown(
 
     h3 {
         text-align: center;
-        color: #bbb;
+        color: #ccc;
         letter-spacing: 1px;
         margin-top: -10px;
     }
 
-    /* INPUT BOX */
+    /* INPUT */
     .stTextInput > div > div > input {
         background: rgba(10,10,10,0.95);
         color: #fff;
@@ -88,36 +92,16 @@ st.markdown(
         background: linear-gradient(135deg, #ff0066, #00ffcc);
         color: #000;
         font-weight: 900;
-        letter-spacing: 1px;
         border-radius: 12px;
         height: 3.2em;
-        box-shadow: 0 0 20px rgba(0,255,204,0.6);
+        box-shadow: 0 0 25px rgba(0,255,204,0.6);
         border: none;
     }
 
     .stButton > button:hover {
         background: linear-gradient(135deg, #ff3388, #33ffee);
-        box-shadow: 0 0 35px rgba(255,0,102,0.9);
+        box-shadow: 0 0 40px rgba(255,0,102,0.9);
         transform: scale(1.03);
-    }
-
-    /* LOGO */
-    .logo {
-        display: block;
-        margin: 10px auto 25px auto;
-        max-width: 280px;
-        filter: 
-            drop-shadow(0 0 20px #00ffcc)
-            drop-shadow(0 0 40px #ff0066);
-    }
-
-    /* CHAT MESSAGES */
-    .stChatMessage {
-        background: rgba(12,12,12,0.8);
-        border-left: 4px solid #00ffcc;
-        border-radius: 10px;
-        padding: 12px;
-        margin-bottom: 10px;
     }
 
     </style>
@@ -125,13 +109,20 @@ st.markdown(
     unsafe_allow_html=True,
 )
 
-# --- LOGO ---
-st.image("assets/logo.jpg", use_container_width=False, width=280)
+# --- CENTERED LOGO ---
+st.markdown(
+    """
+    <div class="logo-center">
+        <img src="assets/logo.jpg">
+    </div>
+    """,
+    unsafe_allow_html=True,
+)
 
 # --- TITLES ---
 st.markdown("<h1>ARCHITECT AI</h1>", unsafe_allow_html=True)
 st.markdown(
-    "<h3>Underground Intelligence • No Noise • Precision Output</h3>",
+    "<h3>Underground Intelligence • Precision Output</h3>",
     unsafe_allow_html=True
 )
 
@@ -236,4 +227,5 @@ st.markdown("""
     <br>© 2025 ARCHITECT AI — All Rights Reserved
 </div>
 """, unsafe_allow_html=True)
+
 
